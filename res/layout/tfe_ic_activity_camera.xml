@@ -25,6 +25,13 @@
         android:background="#00000000"
         android:orientation="vertical">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:name="AR"
+            android:text="@string/ar"
+            android:id="@+id/ARButton"/>
+
 
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
