@@ -52,6 +52,9 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   }
 
   @Override
+  protected int getARLayoutId(){return R.layout.activity_arcore_measurement;}
+
+  @Override
   protected Size getDesiredPreviewFrameSize() {
     return DESIRED_PREVIEW_SIZE;
   }
@@ -81,7 +84,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   }
 
   @Override
-  protected void processImage() {
+  public void processImage() {
     rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
     final int cropSize = Math.min(previewWidth, previewHeight);
 

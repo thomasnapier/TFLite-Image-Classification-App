@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.PixelCopy;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,6 +30,7 @@ import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.MaterialFactory;
@@ -182,4 +187,20 @@ public class ARCoreActivity extends AppCompatActivity {
         // Compute the straight line distance between the two points
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
     }
+
+
+
+//    private Bitmap captureImage(){
+//        ArSceneView view = arFragment.getArSceneView();
+//        final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+//        PixelCopy.request(view, bitmap, (copyResult) -> {
+//            if(copyResult == PixelCopy.SUCCESS){
+//                //Do Nothing
+//            }
+//            else{
+//                Log.i("Image", "Capture Error");
+//            }
+//        }, new Handler(Looper.getMainLooper()));
+//        return bitmap;
+//    }
 }

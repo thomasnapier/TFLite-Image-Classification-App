@@ -634,6 +634,8 @@ public abstract class CameraActivity extends AppCompatActivity
 
   protected abstract int getLayoutId();
 
+  protected abstract int getARLayoutId();
+
   protected abstract Size getDesiredPreviewFrameSize();
 
   protected abstract void onInferenceConfigurationChanged();
