@@ -3,15 +3,27 @@ package org.tensorflow.lite.examples.classification.arcore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
+import android.hardware.camera2.CameraCaptureSession;
+import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CameraManager;
+import android.media.Image;
+import android.media.ImageReader;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.PixelCopy;
+import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +36,7 @@ import com.google.ar.core.Pose;
 import com.google.ar.core.Session;
 import com.google.ar.core.SharedCamera;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
+import com.google.ar.core.exceptions.NotYetAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
@@ -39,6 +52,7 @@ import com.google.ar.sceneform.rendering.ShapeFactory;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+import org.checkerframework.checker.units.qual.C;
 import org.tensorflow.lite.examples.classification.CameraActivity;
 import org.tensorflow.lite.examples.classification.ClassifierActivity;
 import org.tensorflow.lite.examples.classification.R;
@@ -46,7 +60,10 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.Objects;
+
+import androidx.fragment.app.Fragment;
 
 public class ARCoreActivity extends AppCompatActivity {
     private Session session;
@@ -57,6 +74,7 @@ public class ARCoreActivity extends AppCompatActivity {
     private ArrayList<Anchor> placedAnchors = new ArrayList<>();
     private ArrayList<AnchorNode> placedAnchorNodes = new ArrayList<>();
     private TextView distanceText;
+    final int APP_PERMISSION_REQUEST = 7;
 
     private boolean installRequested = true;
 
@@ -188,19 +206,21 @@ public class ARCoreActivity extends AppCompatActivity {
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
     }
 
+    private Bitmap captureImage(){
+        ArSceneView view = arFragment.getArSceneView();
+        final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        PixelCopy.request(view, bitmap, (copyResult) -> {
+            if(copyResult == PixelCopy.SUCCESS){
+                //Do Nothing
+            }
+            else{
+                Log.i("Image", "Capture Error");
+            }
+        }, new Handler(Looper.getMainLooper()));
+        return bitmap;
+    }
 
 
-//    private Bitmap captureImage(){
-//        ArSceneView view = arFragment.getArSceneView();
-//        final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-//        PixelCopy.request(view, bitmap, (copyResult) -> {
-//            if(copyResult == PixelCopy.SUCCESS){
-//                //Do Nothing
-//            }
-//            else{
-//                Log.i("Image", "Capture Error");
-//            }
-//        }, new Handler(Looper.getMainLooper()));
-//        return bitmap;
-//    }
+
+
 }
