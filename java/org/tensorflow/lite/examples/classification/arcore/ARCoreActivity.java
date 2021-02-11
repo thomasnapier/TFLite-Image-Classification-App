@@ -220,7 +220,4 @@ public class ARCoreActivity extends AppCompatActivity {
         return bitmap;
     }
 
-
-
-
 }
