@@ -146,12 +146,22 @@ public abstract class Classifier {
     /** Optional location within the source image for the location of the recognized object. */
     private RectF location;
 
+    private int detectedClass;
+
     public Recognition(
         final String id, final String title, final Float confidence, final RectF location) {
       this.id = id;
       this.title = title;
       this.confidence = confidence;
       this.location = location;
+    }
+
+    public Recognition(final String id, final String title, final Float confidence, final RectF location, int detectedClass) {
+      this.id = id;
+      this.title = title;
+      this.confidence = confidence;
+      this.location = location;
+      this.detectedClass = detectedClass;
     }
 
     public String getId() {
